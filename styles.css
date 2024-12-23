@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#canvas {
+    display: block;
+}
+
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+#controls label {
+    margin-right: 10px;
+}
+
+#controls input, #controls button {
+    margin-left: 5px;
+    margin-right: 15px;
+}
