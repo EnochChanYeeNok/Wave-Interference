@@ -54,29 +54,50 @@ dampingControl.addEventListener('input', (e) => {
     damping = parseFloat(e.target.value);
 });
 
+// Function to reset wall drawing mode
+function stopDrawingWall() {
+    if (isDrawingWall) {
+        isDrawingWall = false;
+        canvas.style.cursor = 'default';
+        drawWallButton.textContent = 'Draw Walls';
+        wallStartPoint = null;
+    }
+}
+
 addSourceButton.addEventListener('click', () => {
+    // Stop drawing walls if active
+    stopDrawingWall();
     // Enable adding a source on the next canvas click
     isAddingSource = true;
     canvas.style.cursor = 'pointer'; // Change cursor to a visible pointer
 });
 
 clearSourcesButton.addEventListener('click', () => {
+    // Stop drawing walls if active
+    stopDrawingWall();
     sources = [];
 });
 
-// Wall drawing controls
 drawWallButton.addEventListener('click', () => {
-    isDrawingWall = !isDrawingWall;
     if (isDrawingWall) {
+        // Stop drawing walls
+        stopDrawingWall();
+    } else {
+        // Start drawing walls
+        isDrawingWall = true;
         canvas.style.cursor = 'crosshair'; // Crosshair cursor for wall drawing
         drawWallButton.textContent = 'Stop Drawing Walls';
-    } else {
-        canvas.style.cursor = 'default';
-        drawWallButton.textContent = 'Draw Walls';
+        // Stop adding source if active
+        if (isAddingSource) {
+            isAddingSource = false;
+            canvas.style.cursor = 'crosshair';
+        }
     }
 });
 
 clearWallsButton.addEventListener('click', () => {
+    // Stop drawing walls if active
+    stopDrawingWall();
     initializeWalls();
 });
 
